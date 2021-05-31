@@ -1,4 +1,7 @@
 const { Router } = require('express');
+const { registerUser, getUsers } = require('../services/usersService');
+const { messages, status } = require('../utils');
+const { regValidationRules, validateReg } = require('../middlewares/validateRegistration');
 
 const RegisterRouter = Router();
 
@@ -37,5 +40,18 @@ const RegisterRouter = Router();
 // );
 // RegisterRouter
 // .put('/update', updateValidationRules(), validateUpdate, UserUpdate);
+
+RegisterRouter.get('/', async (req, res) => {
+  const result = await getUsers();
+
+  res.status(status.CREATED).json(messages.REGISTRATION_SUCCESS);
+});
+
+RegisterRouter.post('/', regValidationRules(), validateReg, async (req, res) => {
+  const data = req.body;
+
+  const result = await registerUser(data);
+  res.status(status.CREATED).json(messages.REGISTRATION_SUCCESS);
+});
 
 module.exports = RegisterRouter;

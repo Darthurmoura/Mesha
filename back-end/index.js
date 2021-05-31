@@ -15,6 +15,8 @@ app.use(cors());
 
 app.use('/:username/register', rescue(RegisterController));
 
+app.use('/', RegisterController);
+
 // app.use((error, req, res, _next) => {
 //   console.log({ error });
 //   return res.status(erro).json(erroInterno);

@@ -5,9 +5,10 @@ async function createTable() {
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    password VARCHAR(20) NOT NULL,
-    aprovado BOOLEAN DEFAULT False,
+    cpf VARCHAR(14) NOT NULL,
+    celular VARCHAR(15),
     conhecimentos VARCHAR(100)[] NOT NULL,
+    aprovado BOOLEAN DEFAULT False,
     data_aprovacao DATE
   )
   `);
