@@ -9,7 +9,7 @@ async function createTable() {
     celular VARCHAR(15),
     conhecimentos VARCHAR(100)[] NOT NULL,
     aprovado BOOLEAN DEFAULT False,
-    data_aprovacao DATE
+    data_aprovacao TIMESTAMP
   )
   `);
 

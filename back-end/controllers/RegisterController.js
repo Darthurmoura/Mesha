@@ -45,33 +45,33 @@ const RegisterRouter = Router();
 // .put('/update', updateValidationRules(), validateUpdate, UserUpdate);
 
 RegisterRouter.get('/', async (req, res) => {
-  const result = await getUsers();
+  const { status, response } = await getUsers();
 
-  res.status(status.OK).json(result);
+  res.status(status).json(response);
 });
 
-RegisterRouter.get('/:cpf', async (req, res) => {
-  const { cpf } = req.params;
-  const { status, message } = await findUser(cpf);
+RegisterRouter.get('/:nome', async (req, res) => {
+  const { nome } = req.params;
+  const { status, response } = await findUser(nome);
 
-  res.status(status).json(message);
+  res.status(status).json(response);
 });
 
 RegisterRouter.post('/', regValidationRules(), validateReg, async (req, res) => {
   const data = req.body;
 
-  const { status, message } = await registerUser(data);
+  const { status, response } = await registerUser(data);
 
-  res.status(status).json(message);
+  res.status(status).json(response);
 });
 
 RegisterRouter.put('/', async (req, res) => {
   // Serão passados o cpf e o boolean pela request
   const data = req.body;
 
-  const { status, message } = await approveRegistration(data);
+  const { status, response } = await approveRegistration(data);
 
-  res.status(status).json(message);
+  res.status(status).json(response);
 })
 
 module.exports = RegisterRouter;
