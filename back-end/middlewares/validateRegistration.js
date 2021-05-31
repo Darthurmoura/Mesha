@@ -16,6 +16,7 @@ const regValidationRules = () => [
     .matches(/^([0-9]){3}\.([0-9]){3}\.([0-9]){3}-([0-9]){2}$/)
     .withMessage({ message: messages.BAD_CPF }),
   body('celular')
+    .optional()
     .matches(/^\(([0-9]){2}\)\s([0-9]){5}-([0-9]){4}$/)
     .withMessage({ message: messages.BAD_CELLNUMBER }),
 ];

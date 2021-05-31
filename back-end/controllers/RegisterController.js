@@ -44,7 +44,7 @@ const RegisterRouter = Router();
 RegisterRouter.get('/', async (req, res) => {
   const result = await getUsers();
 
-  res.status(status.CREATED).json(messages.REGISTRATION_SUCCESS);
+  res.status(status.OK).json(result);
 });
 
 RegisterRouter.post('/', regValidationRules(), validateReg, async (req, res) => {

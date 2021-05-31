@@ -1,5 +1,12 @@
 const db = require('../models/db');
 
+const getUsers = () => {
+  return db.any({
+    text: 'SELECT * FROM users',
+    values: [],
+  });
+};
+
 async function registerUser(data) {
   const { nome, email, cpf, celular, conhecimentos } = data;
   const result = await db.oneOrNone(
@@ -9,9 +16,6 @@ async function registerUser(data) {
   return result;
 }
 
-const getUsers = () => {
-  return db.query('SELECT * FROM users');
-};
 
 module.exports = {
   registerUser,
