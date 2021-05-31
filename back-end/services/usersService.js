@@ -12,7 +12,6 @@ const getUsers = async () => {
 };
 
 const findUser = async (data) => {
-  console.log(data);
   const user = await db.any({
     text: `SELECT *, to_char(data_aprovacao, 'DD/MM/YYYY HH24:mm:ss') AS dataAprovacao
       FROM users
@@ -27,8 +26,6 @@ const registerUser = async (data) => {
   const { nome, email, cpf, celular, conhecimentos } = data;
   const emailExists = await findUser(email);
   const cpfExists = await findUser(cpf);
-  console.log('email', emailExists)
-  console.log('cpf', cpfExists)
 
   if (emailExists.response.length === 0 && cpfExists.response.length === 0) {
     const result = await db.oneOrNone(
