@@ -19,6 +19,10 @@ const regValidationRules = () => [
     .optional()
     .matches(/^\(([0-9]){2}\)\s([0-9]){5}-([0-9]){4}$/)
     .withMessage({ message: messages.BAD_CELLNUMBER }),
+  body('conhecimentos')
+    .exists()
+    .not().isEmpty()
+    .withMessage({ message: messages.REQUIRED_SKILLS }),
 ];
 
 const validateReg = (req, res, next) => {

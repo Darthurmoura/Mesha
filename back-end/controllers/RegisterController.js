@@ -1,6 +1,9 @@
 const { Router } = require('express');
-const { registerUser, getUsers } = require('../services/usersService');
-const { messages, status } = require('../utils');
+const {
+  registerUser,
+  getUsers,
+  findUser,
+  approveRegistration } = require('../services/usersService');
 const { regValidationRules, validateReg } = require('../middlewares/validateRegistration');
 
 const RegisterRouter = Router();
@@ -47,11 +50,28 @@ RegisterRouter.get('/', async (req, res) => {
   res.status(status.OK).json(result);
 });
 
+RegisterRouter.get('/:cpf', async (req, res) => {
+  const { cpf } = req.params;
+  const { status, message } = await findUser(cpf);
+
+  res.status(status).json(message);
+});
+
 RegisterRouter.post('/', regValidationRules(), validateReg, async (req, res) => {
   const data = req.body;
 
-  const result = await registerUser(data);
-  res.status(status.CREATED).json(messages.REGISTRATION_SUCCESS);
+  const { status, message } = await registerUser(data);
+
+  res.status(status).json(message);
 });
+
+RegisterRouter.put('/', async (req, res) => {
+  // Serão passados o cpf e o boolean pela request
+  const data = req.body;
+
+  const { status, message } = await approveRegistration(data);
+
+  res.status(status).json(message);
+})
 
 module.exports = RegisterRouter;
