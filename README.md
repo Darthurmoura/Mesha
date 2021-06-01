@@ -23,3 +23,11 @@ Após isso, faça o clone desse repositório. Defina as variáveis de ambiente e
   
 Terminada essa etapa, pelo terminal, entre na pasta `back-end` e dê o comando `npm install`. Faça o mesmo na pasta `front-end`.
 Depois de instaladas as dependências da aplicação, faça `npm run dev` na pasta `back-end` e abra outro terminal para fazer `npm start` na pasta `front-end`.
+
+# Status da aplicação até agora
+
+- [x] API Rest com Node e Express;
+- [x] Validação com Express-Validator;
+- [x] Estrutura do Front-end com React;
+- [x] Consumo da API via Axios;
+- [ ] Estilização das páginas e componentes com Chakra-UI;
