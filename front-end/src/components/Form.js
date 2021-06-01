@@ -18,21 +18,14 @@ import apiService from '../services/api';
 
 function Form() {
   const [nome, setNome] = useState('');
+  const [validNome, setValidNome] = useState(false);
   const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
   const [cpf, setCpf] = useState('');
+  const [validCpf, setValidCpf] = useState(false);
   const [celular, setCelular] = useState('');
-  const [checkbox, setCheckbox] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [conhecimentos, setConhecimentos] = useState([]);
-
-  useEffect(() => {
-    const emailRegex = /^[a-z0-9_.]+@[a-z0-9]+\.[a-z]+\.?([a-z]+)?$/i;
-    if (emailRegex.test(email)) {
-      setValidEmail(true);
-    } else {
-      setValidEmail(false);
-    }
-  }, [email, cpf]);
 
   const cpfMask = (e) => {
     // código encontrado em: https://tinyurl.com/yykqa5l9
@@ -80,46 +73,94 @@ function Form() {
     };
   };
 
-  const handleSubmit = async () => {
+  const enableButton = () => {
+    if (validNome && validEmail && validCpf && conhecimentos.length > 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  };
+
+  const validateNome = () => {
+    if (nome.length > 0) {
+      setValidNome(true);
+    } else {
+      setValidNome(false);
+    }
+  };
+
+  const validateEmail = () => {
+    const regex = /^[a-z0-9_.]+@[a-z0-9]+\.[a-z]+\.?([a-z]+)?$/i;
+    const valid = regex.test(email);
+    if (email.length > 0 && valid) {
+      setValidEmail(true);
+    } else {
+      setValidEmail(false);
+    }
+  };
+
+  const validateCpf = () => {
+    if (cpf.length === 14) {
+      setValidCpf(true);
+    } else {
+      setValidCpf(false);
+    }
+  };
+
+  useEffect(() => {
+    validateNome();
+    validateEmail();
+    validateCpf();
+    enableButton();
+  }, [nome, email, cpf, conhecimentos]);
+
+  const handleSubmit = () => {
     const user = { nome, email, cpf, celular, conhecimentos };
-    await apiService.registerUser(user);
+    apiService.registerUser(user);
+    setNome('');
+    setEmail('');
+    setCpf('');
+    setCelular('');
+    setConhecimentos([]);
   };
 
   return (
     <Container maxW="container.lg" centerContent>
       <Grid>
         <form>
-          <FormControl isRequired>
+          <FormControl isRequired isInvalid={!validNome}>
             <FormLabel>Nome</FormLabel>
             <Input
               type="text"
               onChange={e => setNome(e.target.value)}
               placeholder="Insira o seu nome completo"
               size="lg"
+              value={nome}
               focusBorderColor="blue.500"
               errorBorderColor="red"
             />
+            <FormErrorMessage>O nome é obrigatório!</FormErrorMessage>
           </FormControl>
-          <FormControl id="email" isRequired>
+          <FormControl id="email" isRequired isInvalid={!validEmail}>
             <FormLabel>E-mail</FormLabel>
             <Input
               type="email"
               onChange={e => setEmail(e.target.value)}
               placeholder="Insira o seu e-mail"
               size="md"
-              value={ email }
+              value={email}
               focusBorderColor="blue.500"
               errorBorderColor="red"
             />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isRequired isInvalid={!validCpf}>
             <FormLabel>CPF</FormLabel>
             <Input
               type="text"
               placeholder="Insira o seu CPF"
               onChange={ e => setCpf(cpfMask(e.target.value)) }
               size="md"
-              value={ cpf }
+              value={cpf}
               focusBorderColor="blue.500"
               errorBorderColor="red"
             />
@@ -131,19 +172,20 @@ function Form() {
               placeholder="Insira o número do seu celular"
               onChange={ e => setCelular(celularMask(e.target.value)) }
               size="md"
-              value={ celular }
+              value={celular}
               focusBorderColor="blue.500"
               errorBorderColor="red"
             />
           </FormControl>
-          <CheckboxGroup colorScheme="purple" isRequired>
+          <CheckboxGroup colorScheme="purple" isRequired isInvalid={conhecimentos.length === 0}>
             Escolha pelo menos 1 skill e no máximo 3:
             <HStack direction="row" spacing="24px">
               {renderConhecimentos(skillStack)}
             </HStack>
           </CheckboxGroup>
           <Button
-            onClick={handleSubmit()}
+            onClick={handleSubmit}
+            isDisabled={isDisabled}
           >
             Registrar
           </Button>

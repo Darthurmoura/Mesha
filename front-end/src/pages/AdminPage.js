@@ -19,10 +19,8 @@ export default function AdminPage() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    apiService.getUsers().then((result) => {
-      setUsers(result);
-    });
-  });
+    apiService.getUsers().then(response => setUsers(response.data))
+  }, []);
 
   console.log(users);
 
@@ -52,7 +50,7 @@ export default function AdminPage() {
                 <Td>{user.email}</Td>
                 <Td>{user.aprovado ? "Aprovado" : "Não aprovado"}</Td>
                 <Td>
-                  <Link to={`/${user.cpf}/aprovar`}>
+                  <Link to={`/${user.nome}/validar`}>
                     <ChevronRightIcon w={8} h={8} />
                   </Link>
                 </Td>

@@ -14,15 +14,11 @@ import Registration from './pages/Registration';
 import ApprovalPage from './pages/ApprovalPage';
 import AdminPage from './pages/AdminPage';
 
-// Import Components
-import ThemeToggler from './components/ThemeToggler';
-
 function App() {
   return (
     <Provider>
       <ThemeProvider theme={theme}>
         <CSSReset />
-        <ThemeToggler />
         <BrowserRouter>
           <Switch>
             <Route exact path="/:nomedocolaborador/registrar">

@@ -38,15 +38,15 @@ const registerUser = async (data) => {
   }
 };
 
-const approveRegistration = async ({ cpf, aprovado }) => {
-  const { response } = await findUser(cpf);
-
+const approveRegistration = async ({nome}) => {
+  const { response } = await findUser(nome);
+  console.log(nome)
   if (response.length > 0) {
-    const approvedUser = db.none(
+    const approvedUser = await db.oneOrNone(
       `UPDATE users
-        SET aprovado = $1, data_aprovacao = (current_timestamp AT TIME ZONE 'America/Sao_Paulo')
-        WHERE cpf = $2;`,
-      [aprovado, cpf]
+        SET aprovado = true, data_aprovacao = (current_timestamp AT TIME ZONE 'America/Sao_Paulo')
+        WHERE nome = $1;`,
+      [nome]
     );
 
     return { status: status.OK, response: messages.UPDATE_SUCCESS }

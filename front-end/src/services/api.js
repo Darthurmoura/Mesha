@@ -8,8 +8,20 @@ function registerUser(data) { (api.post(
   '/', data,
 ))};
 
-function fetchUser(nome) { api.get('/', nome) };
+function getUsers() {
+  const users = api.get('/');
+  return users;
+};
 
-const apiService = { registerUser, fetchUser };
+function getUser(nome) {
+  const user = api.get(`/${nome}`);
+  return user;
+};
+
+function updateUser(nome) { (api.put(
+  '/', nome,
+))};
+
+const apiService = { registerUser, getUsers, getUser, updateUser };
 
 export default apiService;
