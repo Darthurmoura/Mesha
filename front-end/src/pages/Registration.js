@@ -4,6 +4,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Form from '../components/Form';
 
 function Registration() {
+
+
   return (
     <div>
       <Form />

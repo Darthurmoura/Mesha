@@ -14,6 +14,8 @@ import {
   Input,
 } from "@chakra-ui/react";
 
+import apiService from '../services/api';
+
 function Form() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -79,13 +81,14 @@ function Form() {
   };
 
   const handleSubmit = async () => {
-    await registerUser(nome, email, cpf, celular, conhecimentos);
+    const user = { nome, email, cpf, celular, conhecimentos };
+    await apiService.registerUser(user);
   };
 
   return (
     <Container maxW="container.lg" centerContent>
       <Grid>
-        <form onSubmit={handleSubmit()}>
+        <form>
           <FormControl isRequired>
             <FormLabel>Nome</FormLabel>
             <Input
@@ -139,7 +142,11 @@ function Form() {
               {renderConhecimentos(skillStack)}
             </HStack>
           </CheckboxGroup>
-          <Button type="submit">Registrar</Button>
+          <Button
+            onClick={handleSubmit()}
+          >
+            Registrar
+          </Button>
         </form>
       </Grid>
     </Container>

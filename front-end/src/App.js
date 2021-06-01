@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import {
   ThemeProvider,
   theme,
@@ -11,6 +11,8 @@ import Provider from './Context/Provider';
 
 // Import Pages
 import Registration from './pages/Registration';
+import ApprovalPage from './pages/ApprovalPage';
+import AdminPage from './pages/AdminPage';
 
 // Import Components
 import ThemeToggler from './components/ThemeToggler';
@@ -23,7 +25,12 @@ function App() {
         <ThemeToggler />
         <BrowserRouter>
           <Switch>
+            <Route exact path="/:nomedocolaborador/registrar">
+              <Redirect to='/' />
+            </Route>
             <Route exact path="/" component={ Registration } />
+            <Route exact path="/registros" component={ AdminPage } />
+            <Route exact path="/:nomedocolaborador/validar" component={ ApprovalPage } />
           </Switch>
         </BrowserRouter>
       </ThemeProvider>
