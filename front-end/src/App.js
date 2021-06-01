@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
+import {
+  ThemeProvider,
+  theme,
+  CSSReset
+} from '@chakra-ui/react';
+
+// Import context Provider
+import Provider from './Context/Provider';
+
+// Import Pages
+import Registration from './pages/Registration';
+import ApprovalPage from './pages/ApprovalPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider>
+      <ThemeProvider theme={theme}>
+        <CSSReset />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/:nomedocolaborador/registrar">
+              <Redirect to='/' />
+            </Route>
+            <Route exact path="/" component={ Registration } />
+            <Route exact path="/registros" component={ AdminPage } />
+            <Route exact path="/:nomedocolaborador/validar" component={ ApprovalPage } />
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
