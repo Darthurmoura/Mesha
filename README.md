@@ -6,7 +6,7 @@ O teste pedia que fossem desenvolvidos tanto o back-end quanto o front-end de um
 
 # Tecnologias utilizadas
 Front-End: React, React-Router-DOM, Chakra-UI
-Back-End: Node, Express, Express-Validator, PostreSQL
+Back-End: Node, Express, Express-Validator, PostgreSQL
 
 # Como rodar
 Antes de tudo, é preciso ter um banco no PostgreSQL chamado `mangarosa`. 
