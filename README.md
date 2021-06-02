@@ -29,9 +29,9 @@ Depois de instaladas as dependências da aplicação, faça `npm run dev` na pas
 - [x] API Rest com Node e Express;
 - [x] Validação com Express-Validator;
 - [x] Estrutura do Front-end com React;
-- [ ] - [ ] Estilização das páginas e componentes com Chakra-UI;
+- [x] Consumo da API via Axios;
+- [ ] Estilo das páginas e componentes com Chakra-UI;
 - [ ] Adicionar mensagens de erro ao Form;
 - [ ] Adicionar mensagem de atualização do registro (sucesso/falha);
-- [ ] Adicionar
-- [x] Consumo da API via Axios;
+- [ ] Adicionar estilo nos campos do Form que não estiverem válidos;
 
