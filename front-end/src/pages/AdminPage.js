@@ -8,7 +8,8 @@ import {
   Th,
   Td,
   TableCaption,
-  Container
+  Container,
+  Tooltip
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@chakra-ui/icons";
@@ -27,14 +28,17 @@ export default function AdminPage() {
   return (
     <Container w={[200, 600, 700]} centerContent>
       <Table
-        borderWidth={1}
+        borderWidth={0}
         borderRadius={8}
-        boxShadow="lg"
-        colorScheme="purple"
+        boxShadow="xl"
+        mt="20%"
         size="md"
         w={[200, 400, 600]}
       >
-        <Thead bg="gray.100" borderRadius={8}>
+        <Thead
+          bg="gray.100"
+          borderRadius={8}
+        >
           <Tr>
             <Th>Nome</Th>
             <Th>E-mail</Th>
@@ -42,22 +46,33 @@ export default function AdminPage() {
             <Th />
           </Tr>
         </Thead>
-        <Tbody>
-          {users.map((user, index) => {
+        <Tbody bg="gray.200">
+        {users.map((user, index) => {
             return (
-              <Tr key={`${user} ${index}`}>
-                <Td>{user.nome}</Td>
-                <Td>{user.email}</Td>
-                <Td>{user.aprovado ? "Aprovado" : "Não aprovado"}</Td>
-                <Td>
-                  <Link to={`/${user.nome}/validar`}>
-                    <ChevronRightIcon w={8} h={8} />
-                  </Link>
-                </Td>
-              </Tr>
+              <Tooltip
+                label={`
+                  Clique na seta ao lado para ver os detalhes deste usuário e validar o registro`}
+              >
+                <Tr
+                  transition="all 0.2s ease"
+                  _hover={{
+                    background: "yellow.50",
+                    color: "orange.600"
+                  }}
+                  key={`${user} ${index}`}
+                >
+                  <Td>{user.nome}</Td>
+                  <Td>{user.email}</Td>
+                  <Td>{user.aprovado ? "Validado" : "Não validado"}</Td>
+                  <Td>
+                    <Link to={`/${user.nome}/validar`}>
+                      <ChevronRightIcon w={8} h={8} />
+                    </Link>
+                  </Td>
+                </Tr>
+              </Tooltip>
             );
-          })}
-        </Tbody>
+          })}        </Tbody>
       </Table>
     </Container>
   );

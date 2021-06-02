@@ -7,9 +7,10 @@ import {
   StackDivider,
   VStack
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import apiService from '../services/api';
+import '../App.css';
 
 function ApprovalPage() {
   const [user, setUser] = useState({});
@@ -42,10 +43,28 @@ function ApprovalPage() {
   };
 
   return (
-    <Container>
-      <Heading size="lg">{user.nome}</Heading>
+    <Container
+      w={[200, 600, 700]}
+      centerContent
+    >
+      <Box fontFamily="Amatic SC" fontSize="1.4em">
+        <Link
+
+          to='/registros'
+        >
+          Voltar
+        </Link>
+      </Box>
+      <Heading
+        fontFamily="Amatic SC"
+        fontSize="3em"
+        fontWeight="100"
+      >{user.nome}</Heading>
       <VStack
+        bg="gray.200"
         divider={<StackDivider borderColor="gray.200" />}
+        minWidth={500}
+        p={5}
         spacing={4}
         align="stretch"
       >
