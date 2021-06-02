@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   Flex,
-  Box,
   Heading,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+
+import AdminLoginPopover from './AdminLoginPopover';
+import '../App.css';
 
 function Header(props) {
   return (
@@ -18,16 +19,18 @@ function Header(props) {
       {...props}
     >
       <Flex align="center" mr={5}>
-        <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-          Chakra UI
+        <Heading
+          as="h1"
+          className="header--title"
+          fontFamily="Amatic SC"
+          fontSize="3em"
+          fontWeight="100"
+          letterSpacing={"tighter"}>
+          manga rosa
         </Heading>
       </Flex>
 
-      <Box display={{ base: "block", md: "block" }}>
-        <Link to='/registros'>
-          Validar Registros
-        </Link>
-      </Box>
+      <AdminLoginPopover />
     </Flex>
   )
 };

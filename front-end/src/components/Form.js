@@ -128,25 +128,28 @@ function Form() {
     <Container maxW="container.lg" centerContent>
       <Grid>
         <form>
-          <FormControl isRequired isInvalid={!validNome}>
+          <FormControl isRequired>
             <FormLabel>Nome</FormLabel>
             <Input
               type="text"
               onChange={e => setNome(e.target.value)}
               placeholder="Insira o seu nome completo"
+              isInvalid
+              variant="filled"
               size="lg"
               value={nome}
               focusBorderColor="blue.500"
               errorBorderColor="red"
             />
-            <FormErrorMessage>O nome é obrigatório!</FormErrorMessage>
           </FormControl>
-          <FormControl id="email" isRequired isInvalid={!validEmail}>
+          <FormControl id="email" isRequired>
             <FormLabel>E-mail</FormLabel>
             <Input
               type="email"
               onChange={e => setEmail(e.target.value)}
               placeholder="Insira o seu e-mail"
+              variant="filled"
+              isInvalid
               size="md"
               value={email}
               focusBorderColor="blue.500"
@@ -159,6 +162,7 @@ function Form() {
               type="text"
               placeholder="Insira o seu CPF"
               onChange={ e => setCpf(cpfMask(e.target.value)) }
+              variant="filled"
               size="md"
               value={cpf}
               focusBorderColor="blue.500"
@@ -171,6 +175,7 @@ function Form() {
               type="text"
               placeholder="Insira o número do seu celular"
               onChange={ e => setCelular(celularMask(e.target.value)) }
+              variant="filled"
               size="md"
               value={celular}
               focusBorderColor="blue.500"

@@ -14,23 +14,28 @@ import Registration from './pages/Registration';
 import ApprovalPage from './pages/ApprovalPage';
 import AdminPage from './pages/AdminPage';
 
+// Import style sheet
+import './App.css';
+
 function App() {
   return (
-    <Provider>
-      <ThemeProvider theme={theme}>
-        <CSSReset />
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/:nomedocolaborador/registrar">
-              <Redirect to='/' />
-            </Route>
-            <Route exact path="/" component={ Registration } />
-            <Route exact path="/registros" component={ AdminPage } />
-            <Route exact path="/:nomedocolaborador/validar" component={ ApprovalPage } />
-          </Switch>
-        </BrowserRouter>
-      </ThemeProvider>
-    </Provider>
+    <main className="main">
+      <Provider>
+        <ThemeProvider theme={theme}>
+          <CSSReset />
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/:nomedocolaborador/registrar">
+                <Redirect to='/' />
+              </Route>
+              <Route exact path="/" component={ Registration } />
+              <Route exact path="/registros" component={ AdminPage } />
+              <Route exact path="/:nomedocolaborador/validar" component={ ApprovalPage } />
+            </Switch>
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    </main>
   );
 }
 
