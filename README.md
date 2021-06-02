@@ -31,6 +31,7 @@ Depois de instaladas as dependências da aplicação, faça `npm run dev` na pas
 - [x] Estrutura do Front-end com React;
 - [x] Consumo da API via Axios;
 - [ ] Estilo das páginas e componentes com Chakra-UI;
+- [ ] Adicionar Header com logo, ícone e menu;
 - [ ] Adicionar mensagens de erro ao Form;
 - [ ] Adicionar mensagem de atualização do registro (sucesso/falha);
 - [ ] Adicionar estilo nos campos do Form que não estiverem válidos;
